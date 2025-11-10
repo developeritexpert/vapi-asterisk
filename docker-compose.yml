@@ -1,0 +1,15 @@
+services:
+  asterisk:
+    build: ./docker
+    container_name: asterisk
+    ports:
+      - "5070:5070/udp"
+      - "5070:5070/tcp"
+      - "8088:8088/tcp"
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    volumes:
+      - ./asterisk-config/pjsip.conf:/etc/asterisk/pjsip.conf
+      - ./asterisk-config/extensions.conf:/etc/asterisk/extensions.conf
+    restart: unless-stopped
